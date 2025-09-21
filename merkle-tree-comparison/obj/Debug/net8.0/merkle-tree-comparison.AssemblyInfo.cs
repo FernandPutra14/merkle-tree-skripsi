@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("merkle-tree-comparison")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3d7d3db96fc8f97c1af65ade32de8c578a360422")]
 [assembly: System.Reflection.AssemblyProductAttribute("merkle-tree-comparison")]
 [assembly: System.Reflection.AssemblyTitleAttribute("merkle-tree-comparison")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

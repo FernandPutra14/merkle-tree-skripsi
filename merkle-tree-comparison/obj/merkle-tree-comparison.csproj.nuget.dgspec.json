@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\putra\\source\\repos\\merkle-tree-comparison\\merkle-tree-comparison\\merkle-tree-comparison.csproj": {}
+    "D:\\Proyek\\Fernand Skripsi\\merkle-tree-skripsi\\merkle-tree-comparison\\merkle-tree-comparison.csproj": {}
   },
   "projects": {
-    "C:\\Users\\putra\\source\\repos\\merkle-tree-comparison\\merkle-tree-comparison\\merkle-tree-comparison.csproj": {
+    "D:\\Proyek\\Fernand Skripsi\\merkle-tree-skripsi\\merkle-tree-comparison\\merkle-tree-comparison.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\putra\\source\\repos\\merkle-tree-comparison\\merkle-tree-comparison\\merkle-tree-comparison.csproj",
+        "projectUniqueName": "D:\\Proyek\\Fernand Skripsi\\merkle-tree-skripsi\\merkle-tree-comparison\\merkle-tree-comparison.csproj",
         "projectName": "merkle-tree-comparison",
-        "projectPath": "C:\\Users\\putra\\source\\repos\\merkle-tree-comparison\\merkle-tree-comparison\\merkle-tree-comparison.csproj",
-        "packagesPath": "C:\\Users\\putra\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\putra\\source\\repos\\merkle-tree-comparison\\merkle-tree-comparison\\obj\\",
+        "projectPath": "D:\\Proyek\\Fernand Skripsi\\merkle-tree-skripsi\\merkle-tree-comparison\\merkle-tree-comparison.csproj",
+        "packagesPath": "C:\\Users\\yogat\\.nuget\\packages\\",
+        "outputPath": "D:\\Proyek\\Fernand Skripsi\\merkle-tree-skripsi\\merkle-tree-comparison\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\putra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\yogat\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,7 +43,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -74,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
