@@ -1,0 +1,6 @@
+@merkle_tree_comparison_HostAddress = http://localhost:5026
+
+GET {{merkle_tree_comparison_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
