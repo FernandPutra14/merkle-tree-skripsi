@@ -6,7 +6,7 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        var data = new List<string>() { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "L", "M", "N", "O" };
+        var data = new List<string>() { "A", "B", "C", "D", "E" };
         var tree = new MerkleTree(data);
 
         tree.Print();
@@ -58,39 +58,54 @@ class MerkleTree
 
     public MerkleTree(List<string> data, Func<string, string>? hasher = null)
     {
-        var orderedData = data.OrderBy(x => x, StringComparer.OrdinalIgnoreCase).ToList();
-        var nodes = new Queue<MerkleNode>();
         _leaves = new List<MerkleNode>();
 
         hasher ??= Hash;
 
-        foreach (var item in orderedData)
+        foreach (var item in data)
         {
             var leaf = new MerkleNode(hasher(item), null, null, null);
             _leaves.Add(leaf);
-            nodes.Enqueue(leaf);
         }
 
-        while (nodes.Count > 1)
-        {
-            var left = nodes.Dequeue();
-            var right = nodes.Dequeue();
+        var nodes = _leaves.ToList();
 
-            var hash = hasher(left.Hash + right.Hash);
+        var start = 0;
+        var end = nodes.Count - 1;
+        var mid = (start + end) / 2;
 
-            var parent = new MerkleNode(hash, null, left, right);
+        var left = Build(nodes, start, mid, hasher);
+        var right = Build(nodes, mid + 1, end, hasher);
 
-            left.Parent = parent;
-            left.Type = NodeType.Left;
+        _root = new MerkleNode(hasher(left.Hash + right.Hash), null, left, right, NodeType.Root);
+        left.Parent = _root;
+        left.Type = NodeType.Left;
 
-            right.Parent = parent;
-            right.Type = NodeType.Right;
+        right.Parent = _root;
+        right.Type = NodeType.Right;
+    }
 
-            nodes.Enqueue(parent);
-        }
+    private MerkleNode Build(List<MerkleNode> nodes, int start, int end, Func<string, string> hasher)
+    {
+        if (start - end == 0)
+            return new MerkleNode(nodes[start].Hash, null, null, null, NodeType.Left);
 
-        _root = nodes.Dequeue();
-        _root.Type = NodeType.Root;
+        if (start - end == 1)
+            return new MerkleNode(hasher(nodes[start].Hash + nodes[end].Hash), null, nodes[start], nodes[end]);
+
+        var mid = (start + end) / 2;
+
+        var left = Build(nodes, start, mid, hasher);
+        var right = Build(nodes, mid + 1, end, hasher);
+
+        var parent = new MerkleNode(hasher(left.Hash + right.Hash), null, left, right);
+        left.Parent = parent;
+        left.Type = NodeType.Left;
+
+        right.Parent = parent;
+        right.Type = NodeType.Right;
+
+        return parent;
     }
 
     public void Print()
