@@ -6,11 +6,16 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        var data = new List<string>() { "A", "B", "C", "D", "E", "F", "G", "H" };
-        var tree = new MerkleTree(data, s => s.GetHashCode().ToString());
+        var data = new List<string>() { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "L", "M", "N", "O" };
+        var tree = new MerkleTree(data);
 
         tree.Print();
     }
+}
+
+public enum NodeType
+{
+    Left, Right, Root
 }
 
 public class MerkleNode : IEquatable<MerkleNode>
@@ -19,16 +24,16 @@ public class MerkleNode : IEquatable<MerkleNode>
     public MerkleNode? Parent { get; set; }
     public MerkleNode? Left { get; set; }
     public MerkleNode? Right { get; set; }
+    public NodeType Type { get; set; }
 
-    public MerkleNode(string hash, MerkleNode? parent, MerkleNode? left, MerkleNode? right)
+    public MerkleNode(string hash, MerkleNode? parent, MerkleNode? left, MerkleNode? right, NodeType type = default)
     {
         Hash = hash;
         Parent = parent;
         Left = left;
         Right = right;
+        Type = type;
     }
-
-    public static readonly MerkleNode Empty = new MerkleNode(string.Empty, null, null, null);
 
     public bool Equals(MerkleNode? other) =>
         other is not null &&
@@ -71,15 +76,21 @@ class MerkleTree
             var left = nodes.Dequeue();
             var right = nodes.Dequeue();
 
-            var parent = new MerkleNode(hasher(left.Hash + right.Hash), null, left, right);
+            var hash = hasher(left.Hash + right.Hash);
+
+            var parent = new MerkleNode(hash, null, left, right);
 
             left.Parent = parent;
+            left.Type = NodeType.Left;
+
             right.Parent = parent;
+            right.Type = NodeType.Right;
 
             nodes.Enqueue(parent);
         }
 
         _root = nodes.Dequeue();
+        _root.Type = NodeType.Root;
     }
 
     public void Print()
@@ -93,14 +104,21 @@ class MerkleTree
             var level = 0;
 
             var tmp = node;
+            var fills = new List<string>();
             while (tmp?.Parent is not null)
             {
                 tmp = tmp.Parent;
+
+                if (tmp is not null && tmp.Type != NodeType.Root)
+                    if (tmp.Type == NodeType.Right)
+                        fills.Add("|  ");
+                    else
+                        fills.Add("   ");
+
                 level++;
             }
 
-            for (int i = 1; i < level; i++)
-                Console.Write("|  ");
+            Console.Write(string.Join(string.Empty, fills.Reverse<string>()));
 
             if (node.Parent is not null)
                 if (node.Parent.Left == node)
@@ -118,5 +136,5 @@ class MerkleTree
         }
     }
 
-    private string Hash(string data) => Encoding.UTF8.GetString(SHA256.HashData(Encoding.UTF8.GetBytes(data)));
+    private string Hash(string data) => data;
 }
