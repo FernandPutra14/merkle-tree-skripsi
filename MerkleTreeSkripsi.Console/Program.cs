@@ -57,16 +57,17 @@ class MerkleTree
 {
     private readonly MerkleNode _root;
     private readonly List<MerkleNode> _leaves;
+    private readonly Func<byte[], byte[]> _hasher;
 
     public MerkleTree(List<byte[]> data, Func<byte[], byte[]>? hasher = null)
     {
         _leaves = new List<MerkleNode>();
 
-        hasher ??= SHA256.HashData;
+        _hasher ??= SHA256.HashData;
 
         foreach (var item in data)
         {
-            var leaf = new MerkleNode(hasher(item), null, null, null);
+            var leaf = new MerkleNode(_hasher(item), null, null, null);
             _leaves.Add(leaf);
         }
 
@@ -76,10 +77,10 @@ class MerkleTree
         var end = nodes.Count - 1;
         var mid = (start + end) / 2;
 
-        var left = Build(nodes, start, mid, hasher);
-        var right = Build(nodes, mid + 1, end, hasher);
+        var left = Build(nodes, start, mid);
+        var right = Build(nodes, mid + 1, end);
 
-        _root = new MerkleNode(hasher(left.Hash.Concat(right.Hash).ToArray()), null, left, right, NodeType.Root);
+        _root = new MerkleNode(_hasher(left.Hash.Concat(right.Hash).ToArray()), null, left, right, NodeType.Root);
         left.Parent = _root;
         left.Type = NodeType.Left;
 
@@ -87,20 +88,20 @@ class MerkleTree
         right.Type = NodeType.Right;
     }
 
-    private MerkleNode Build(List<MerkleNode> nodes, int start, int end, Func<byte[], byte[]> hasher)
+    private MerkleNode Build(List<MerkleNode> nodes, int start, int end)
     {
         if (start - end == 0)
             return new MerkleNode(nodes[start].Hash, null, null, null, NodeType.Left);
 
         if (start - end == 1)
-            return new MerkleNode(hasher(nodes[start].Hash.Concat(nodes[end].Hash).ToArray()), null, nodes[start], nodes[end]);
+            return new MerkleNode(_hasher(nodes[start].Hash.Concat(nodes[end].Hash).ToArray()), null, nodes[start], nodes[end]);
 
         var mid = (start + end) / 2;
 
-        var left = Build(nodes, start, mid, hasher);
-        var right = Build(nodes, mid + 1, end, hasher);
+        var left = Build(nodes, start, mid);
+        var right = Build(nodes, mid + 1, end);
 
-        var parent = new MerkleNode(hasher(left.Hash.Concat(right.Hash).ToArray()), null, left, right);
+        var parent = new MerkleNode(_hasher(left.Hash.Concat(right.Hash).ToArray()), null, left, right);
         left.Parent = parent;
         left.Type = NodeType.Left;
 
