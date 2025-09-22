@@ -1,13 +1,13 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
-        var data = new List<string>() { "A", "B", "C", "D", "E" };
-        var tree = new MerkleTree(data);
+        var data = new List<string>() { "A", "B", "C", "D", "E", "F" };
+
+        var tree = new MerkleTree(data.Select(a => Encoding.UTF8.GetBytes(a)).ToList());
 
         tree.Print();
     }
@@ -20,13 +20,15 @@ public enum NodeType
 
 public class MerkleNode : IEquatable<MerkleNode>
 {
-    public string Hash { get; set; }
+    public string HexHash => string.Join("", Hash.Select(v => $"{v:x2}"));
+
+    public byte[] Hash { get; set; }
     public MerkleNode? Parent { get; set; }
     public MerkleNode? Left { get; set; }
     public MerkleNode? Right { get; set; }
     public NodeType Type { get; set; }
 
-    public MerkleNode(string hash, MerkleNode? parent, MerkleNode? left, MerkleNode? right, NodeType type = default)
+    public MerkleNode(byte[] hash, MerkleNode? parent, MerkleNode? left, MerkleNode? right, NodeType type = default)
     {
         Hash = hash;
         Parent = parent;
@@ -37,14 +39,14 @@ public class MerkleNode : IEquatable<MerkleNode>
 
     public bool Equals(MerkleNode? other) =>
         other is not null &&
-        Hash == other.Hash &&
-        Left?.Hash == other.Left?.Hash &&
-        Right?.Hash == other.Right?.Hash &&
-        Parent?.Hash == other.Parent?.Hash;
+        HexHash == other.HexHash &&
+        Parent?.HexHash == other.Parent?.HexHash &&
+        Left?.HexHash == other.Left?.HexHash &&
+        Right?.HexHash == other.Right?.HexHash;
 
     public override bool Equals(object? obj) => obj is not null && obj is MerkleNode node && Equals(node);
 
-    public override int GetHashCode() => Hash.GetHashCode();
+    public override int GetHashCode() => Hash.Aggregate(default(int), HashCode.Combine);
 
     public static bool operator ==(MerkleNode? l, MerkleNode? r) => l is not null && l.Equals(r);
 
@@ -56,11 +58,11 @@ class MerkleTree
     private readonly MerkleNode _root;
     private readonly List<MerkleNode> _leaves;
 
-    public MerkleTree(List<string> data, Func<string, string>? hasher = null)
+    public MerkleTree(List<byte[]> data, Func<byte[], byte[]>? hasher = null)
     {
         _leaves = new List<MerkleNode>();
 
-        hasher ??= Hash;
+        hasher ??= SHA256.HashData;
 
         foreach (var item in data)
         {
@@ -77,7 +79,7 @@ class MerkleTree
         var left = Build(nodes, start, mid, hasher);
         var right = Build(nodes, mid + 1, end, hasher);
 
-        _root = new MerkleNode(hasher(left.Hash + right.Hash), null, left, right, NodeType.Root);
+        _root = new MerkleNode(hasher(left.Hash.Concat(right.Hash).ToArray()), null, left, right, NodeType.Root);
         left.Parent = _root;
         left.Type = NodeType.Left;
 
@@ -85,20 +87,20 @@ class MerkleTree
         right.Type = NodeType.Right;
     }
 
-    private MerkleNode Build(List<MerkleNode> nodes, int start, int end, Func<string, string> hasher)
+    private MerkleNode Build(List<MerkleNode> nodes, int start, int end, Func<byte[], byte[]> hasher)
     {
         if (start - end == 0)
             return new MerkleNode(nodes[start].Hash, null, null, null, NodeType.Left);
 
         if (start - end == 1)
-            return new MerkleNode(hasher(nodes[start].Hash + nodes[end].Hash), null, nodes[start], nodes[end]);
+            return new MerkleNode(hasher(nodes[start].Hash.Concat(nodes[end].Hash).ToArray()), null, nodes[start], nodes[end]);
 
         var mid = (start + end) / 2;
 
         var left = Build(nodes, start, mid, hasher);
         var right = Build(nodes, mid + 1, end, hasher);
 
-        var parent = new MerkleNode(hasher(left.Hash + right.Hash), null, left, right);
+        var parent = new MerkleNode(hasher(left.Hash.Concat(right.Hash).ToArray()), null, left, right);
         left.Parent = parent;
         left.Type = NodeType.Left;
 
@@ -141,7 +143,7 @@ class MerkleTree
                 else
                     Console.Write("|--");
 
-            Console.WriteLine(node.Hash);
+            Console.WriteLine(node.HexHash);
 
             if (node.Left is not null)
                 stack.Push(node.Left);
@@ -150,6 +152,4 @@ class MerkleTree
                 stack.Push(node.Right);
         }
     }
-
-    private string Hash(string data) => data;
 }
