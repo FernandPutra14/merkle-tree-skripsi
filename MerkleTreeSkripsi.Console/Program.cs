@@ -5,7 +5,7 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        var data = new List<string>() { "A", "B", "C", "D", "E", "F" };
+        var data = new List<string>() { "A", "B", "C", "D" };
 
         var tree = new MerkleTree(data.Select(a => Encoding.UTF8.GetBytes(a)).ToList());
 
@@ -55,7 +55,8 @@ public class MerkleNode : IEquatable<MerkleNode>
 
 class MerkleTree
 {
-    private readonly MerkleNode _root;
+    public  readonly MerkleNode Root;
+
     private readonly List<MerkleNode> _leaves;
     private readonly Func<byte[], byte[]> _hasher;
 
@@ -80,11 +81,11 @@ class MerkleTree
         var left = Build(nodes, start, mid);
         var right = Build(nodes, mid + 1, end);
 
-        _root = new MerkleNode(_hasher(left.Hash.Concat(right.Hash).ToArray()), null, left, right, NodeType.Root);
-        left.Parent = _root;
+        Root = new MerkleNode(_hasher(left.Hash.Concat(right.Hash).ToArray()), null, left, right, NodeType.Root);
+        left.Parent = Root;
         left.Type = NodeType.Left;
 
-        right.Parent = _root;
+        right.Parent = Root;
         right.Type = NodeType.Right;
     }
 
@@ -114,7 +115,7 @@ class MerkleTree
     public void Print()
     {
         var stack = new Stack<MerkleNode>();
-        stack.Push(_root);
+        stack.Push(Root);
 
         while (stack.Count > 0)
         {

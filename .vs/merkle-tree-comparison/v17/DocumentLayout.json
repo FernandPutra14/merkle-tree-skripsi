@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "D:\\Proyek\\Fernand Skripsi\\merkle-tree-skripsi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3DFE10BC-4C29-4AB4-B411-5F462C4DAA9F}|MerkleTreeSkripsi.Console\\MerkleTreeSkripsi.Console.csproj|d:\\proyek\\fernand skripsi\\merkle-tree-skripsi\\merkletreeskripsi.console\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3DFE10BC-4C29-4AB4-B411-5F462C4DAA9F}|MerkleTreeSkripsi.Console\\MerkleTreeSkripsi.Console.csproj|solutionrelative:merkletreeskripsi.console\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Proyek\\Fernand Skripsi\\merkle-tree-skripsi\\merkle-tree-comparison\\Migrations\\20250923093303_InitialMigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:merkle-tree-comparison\\Migrations\\20250923093303_InitialMigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C71514D9-2F67-4D21-B105-ADDE5C61D508}|merkle-tree-comparison\\merkle-tree-comparison.csproj|d:\\proyek\\fernand skripsi\\merkle-tree-skripsi\\merkle-tree-comparison\\databases\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C71514D9-2F67-4D21-B105-ADDE5C61D508}|merkle-tree-comparison\\merkle-tree-comparison.csproj|solutionrelative:merkle-tree-comparison\\databases\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C71514D9-2F67-4D21-B105-ADDE5C61D508}|merkle-tree-comparison\\merkle-tree-comparison.csproj|d:\\proyek\\fernand skripsi\\merkle-tree-skripsi\\merkle-tree-comparison\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C71514D9-2F67-4D21-B105-ADDE5C61D508}|merkle-tree-comparison\\merkle-tree-comparison.csproj|solutionrelative:merkle-tree-comparison\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -47,14 +55,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Proyek\\Fernand Skripsi\\merkle-tree-skripsi\\MerkleTreeSkripsi.Console\\Program.cs",
-              "RelativeDocumentMoniker": "MerkleTreeSkripsi.Console\\Program.cs",
-              "ToolTip": "D:\\Proyek\\Fernand Skripsi\\merkle-tree-skripsi\\MerkleTreeSkripsi.Console\\Program.cs",
-              "RelativeToolTip": "MerkleTreeSkripsi.Console\\Program.cs",
-              "ViewState": "AgIAAHkAAAAAAAAAAAAAAJEAAAAqAAAAAAAAAA==",
+              "Title": "20250923093303_InitialMigration.cs",
+              "DocumentMoniker": "D:\\Proyek\\Fernand Skripsi\\merkle-tree-skripsi\\merkle-tree-comparison\\Migrations\\20250923093303_InitialMigration.cs",
+              "RelativeDocumentMoniker": "merkle-tree-comparison\\Migrations\\20250923093303_InitialMigration.cs",
+              "ToolTip": "D:\\Proyek\\Fernand Skripsi\\merkle-tree-skripsi\\merkle-tree-comparison\\Migrations\\20250923093303_InitialMigration.cs",
+              "RelativeToolTip": "merkle-tree-comparison\\Migrations\\20250923093303_InitialMigration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-21T13:36:55.558Z",
+              "WhenOpened": "2025-09-23T09:33:03.982Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\Proyek\\Fernand Skripsi\\merkle-tree-skripsi\\merkle-tree-comparison\\Databases\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "merkle-tree-comparison\\Databases\\AppDbContext.cs",
+              "ToolTip": "D:\\Proyek\\Fernand Skripsi\\merkle-tree-skripsi\\merkle-tree-comparison\\Databases\\AppDbContext.cs",
+              "RelativeToolTip": "merkle-tree-comparison\\Databases\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T09:32:54.245Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "D:\\Proyek\\Fernand Skripsi\\merkle-tree-skripsi\\merkle-tree-comparison\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "merkle-tree-comparison\\Controllers\\WeatherForecastController.cs",
+              "ToolTip": "D:\\Proyek\\Fernand Skripsi\\merkle-tree-skripsi\\merkle-tree-comparison\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "merkle-tree-comparison\\Controllers\\WeatherForecastController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T09:32:19.645Z",
               "EditorCaption": ""
             }
           ]
