@@ -1,4 +1,4 @@
-﻿namespace merkle_tree_comparison.Models;
+﻿namespace merkle_tree_comparison.Databases.Models;
 
 public class UserFile
 {

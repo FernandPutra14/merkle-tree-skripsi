@@ -1,4 +1,4 @@
-﻿using merkle_tree_comparison.Models;
+﻿using merkle_tree_comparison.Databases.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace merkle_tree_comparison.Databases;
